@@ -42,7 +42,7 @@ def parse_args():
     p.add_argument(
         "--cash-model",
         type=str,
-        default="./runs/detect/train-2/weights/best.pt",
+        default="./../yolo_world/runs/detect/train-2/weights/best.pt",
         help="Path to custom cash detector",
     )
     p.add_argument(

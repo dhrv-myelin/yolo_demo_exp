@@ -4,12 +4,8 @@ from ultralytics import YOLOWorld
 model = YOLOWorld("yolov8s-worldv2.pt")
 
 # Define custom classes
-model.set_classes(
-    [
-        "cashier",
-    ]
-)
-#
+model.set_classes(["green shirt"])
+
 #
 # results = model.train(
 #     data="./data/cash detection.v1-augmented.yolo26/data.yaml", epochs=100

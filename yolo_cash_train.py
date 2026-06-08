@@ -1,13 +1,14 @@
 from ultralytics import YOLO
 
 # Load a pretrained YOLO model (recommended for training)
-model = YOLO("yolo26m.pt")
+model = YOLO("yolo26s.pt")
 
 # model = YOLO("./runs/detect/train/weights/best.pt")
 
-# Train the model using the 'coco8.yaml' dataset for 3 epochs
+# # Train the model using the 'coco8.yaml' dataset for 3 epochs
 results = model.train(
-    data="./data/Cash Detection.v1-augmented.yolo26/data.yaml", epochs=50
+    data="./data/data.yaml",
+    epochs=100,
 )
 
 # Evaluate the model's performance on the validation set
