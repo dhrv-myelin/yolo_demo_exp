@@ -49,7 +49,7 @@ args = parser.parse_args()
 # Load model and video
 # --------------------------------------------------
 
-model = YOLO("./../yolo_world/runs/detect/train-2/weights/best.pt")
+model = YOLO("best.pt")
 
 cap = cv2.VideoCapture("./data/Vid4.mp4")
 
@@ -86,10 +86,15 @@ if not args.show:
 # --------------------------------------------------
 
 polygon_points = []
-# polygon_points = [[566, 408], [745, 410], [740, 175], [558, 165], [558, 399]] # for vid1
+# polygon_points = [[734, 396], [724, 207], [476, 199], [468, 257], [621, 272], [625, 399], [735, 396]] # for vid3
 # polygon_points = [[566, 408], [745, 410], [740, 175], [558, 165], [558, 399]] # for vid2
-# polygon_points = [[648, 481], [858, 404], [721, 223], [546, 292], [647, 475]] # gor vid4
-# polygon_points = [[648, 481], [858, 404], [721, 223], [546, 292], [647, 475]] # gor vid4
+polygon_points = [
+    [648, 481],
+    [858, 404],
+    [721, 223],
+    [546, 292],
+    [647, 475],
+]  # gor vid4
 
 roi_polygon = None
 
@@ -228,16 +233,7 @@ while True:
 
                 if previous and not inside:
 
-                    msg = f"Cash ID {track_id} LEFT ROI"
-
-                    print(msg)
-
-                    event_history.append(msg)
-                    event_history = event_history[-MAX_EVENTS:]
-
-                elif not previous and inside:
-
-                    msg = f"Cash ID {track_id} ENTERED ROI"
+                    msg = f"Cash item {track_id} removed from monitored area"
 
                     print(msg)
 
@@ -245,6 +241,26 @@ while True:
                     event_history = event_history[-MAX_EVENTS:]
 
                 object_states[track_id] = inside
+
+                # if previous and not inside:
+
+                #     msg = f"Cash ID {track_id} LEFT ROI"
+
+                #     print(msg)
+
+                #     event_history.append(msg)
+                #     event_history = event_history[-MAX_EVENTS:]
+
+                # elif not previous and inside:
+
+                #     msg = f"Cash ID {track_id} ENTERED ROI"
+
+                #     print(msg)
+
+                #     event_history.append(msg)
+                #     event_history = event_history[-MAX_EVENTS:]
+
+                # object_states[track_id] = inside
 
     annotated = results[0].plot(img=annotated)
 
