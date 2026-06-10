@@ -1,4 +1,5 @@
 import argparse
+import os
 import json
 import logging
 
@@ -69,7 +70,7 @@ def log_alert(camera_name, video_timestamp, message):
 # Load model and video
 # --------------------------------------------------
 
-model = YOLO("./../yolo_world/runs/detect/train-2/weights/best.pt")
+model = YOLO("./best.pt")
 
 cap = cv2.VideoCapture(VIDEO_PATH)
 
@@ -92,7 +93,7 @@ height, width = first_frame.shape[:2]
 
 writer = None
 
-output_path = f"{CAMERA_NAME}_tracking.mp4"
+output_path = os.path.splitext(os.path.basename(VIDEO_PATH))[0] + "_tracking.mp4"
 
 if not args.show:
     writer = cv2.VideoWriter(
